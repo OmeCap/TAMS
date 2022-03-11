@@ -1,0 +1,15 @@
+body {
+    /* text-align: center; */
+    margin: 10%;
+    font-size: 15px;
+}
+
+h3 {
+    text-align: center;
+}
+
+.logout-button {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
