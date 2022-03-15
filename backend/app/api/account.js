@@ -8,14 +8,13 @@ const router = new Router();
 
 router.post('/signup', (req, res, next) => {
     const { username, password } = req.body;
-    // const username = username;
     const passwordHash = hash(password);
 
     AccountTable.getAccount({ username })
         .then(({ account }) => {
-            if (!account) {
+            if (!account) {     // If the username does not exist.
                 return AccountTable.storeAccount({ username, passwordHash })
-            } else {
+            } else {    // If the username already exists.
                 const error = new Error('This username has already been taken');
 
                 error.statusCode = 409;

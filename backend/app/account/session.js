@@ -26,6 +26,7 @@ class Session {
         };
     }
 
+    // Retrieve account data, then compare hashed account data with session hash.
     static verify(sessionString) {
         const { username, id, sessionHash } = Session.parse(sessionString);
 

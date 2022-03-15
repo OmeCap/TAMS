@@ -3,6 +3,7 @@ const pool = require('../../databasePool.js');
 // Static class methods that interact with the database
 
 class AccountTable {
+    // Store username and passwordHash to the table.
     static storeAccount({ username, passwordHash }) {
         return new Promise((resolve, reject) => {
             pool.query(
@@ -17,6 +18,7 @@ class AccountTable {
         });
     }
 
+    // Get account details using username.
     static getAccount({ username }) {
         return new Promise((resolve, reject) => {
             pool.query(
@@ -32,6 +34,7 @@ class AccountTable {
         });
     }
 
+    // Update sessionId using username.
     static updateSessionId({ sessionId, username }) {
         return new Promise((resolve, reject) => {
             pool.query(
