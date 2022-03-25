@@ -75,4 +75,17 @@ router.get('/authenticated', (req, res, next) => {
         .catch(error => next(error))
 });
 
+router.get('/info', (req, res, next) => {
+    authenticatedAccount({ sessionString: req.cookies.sessionString })
+        .then(({ account, username }) => {
+            res.json({ info: { 
+                    accountType: account.accountType,
+                    username,
+                    fullName: account.fullName
+                }
+            })
+        })
+        .catch(error => next(error));
+})
+
 module.exports = router;

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../actions/account';
 import TaApplication from './taApplication';
 import TaNavigation from './TaNavigation';
+import AccountInfo from './AccountInfo';
 
 class Home extends Component {
     render() {
@@ -18,6 +19,8 @@ class Home extends Component {
                 <p>This is Homepage.</p>
                 <hr />
                 <Link to='/ta-application'> TA Application </Link>
+                <hr />
+                <AccountInfo />
             </div>
         );
     }
