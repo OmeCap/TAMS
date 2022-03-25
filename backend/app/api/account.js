@@ -7,13 +7,13 @@ const { setSession, authenticatedAccount } = require('./helper.js');
 const router = new Router();
 
 router.post('/signup', (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, password, accountType, fullName } = req.body;
     const passwordHash = hash(password);
 
     AccountTable.getAccount({ username })
         .then(({ account }) => {
             if (!account) {     // If the username does not exist.
-                return AccountTable.storeAccount({ username, passwordHash })
+                return AccountTable.storeAccount({ username, passwordHash, accountType, fullName })
             } else {    // If the username already exists.
                 const error = new Error('This username has already been taken');
 

@@ -1,4 +1,3 @@
-const { hash } = require('../account/helper');
 const Session = require('../account/session');
 const AccountTable = require('../account/table');
 
@@ -7,7 +6,7 @@ const setSession = ({ username, res, sessionId }) => {
         let session, sessionString;
 
         if (sessionId) {
-            sessionString = Session.sessionString({ username, id: sessionId });
+            sessionString = Session.sessionString({ username, userId: sessionId });
 
             setSessionCookie({ sessionString, res });
 
@@ -47,7 +46,7 @@ const authenticatedAccount = ({ sessionString }) => {
     
             return reject(error);
         } else {
-            const { username, id } = Session.parse(sessionString);
+            const { username, id } = Session.parse(sessionString); // CHECK!!!!
     
             AccountTable.getAccount({ username: username })
                 .then(({ account }) => {

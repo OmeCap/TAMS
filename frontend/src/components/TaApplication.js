@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+
 import fetchStates from '../reducers/fetchStates';
 import { uploadProfile } from '../actions/taprofile';
+import TaNavigation from './TaNavigation';
 
 class TaApplication extends Component {
   state = { 
@@ -45,6 +48,9 @@ class TaApplication extends Component {
 
     this.props.uploadProfile({ email, upi, homeAddress, currentYear, roleType, feeStatus });
     // console.log(this.state);
+    // let navigate = useNavigate(); 
+    // let path = `/`; 
+    // navigate(path)
   }
 
   get Error() {
@@ -59,6 +65,7 @@ class TaApplication extends Component {
   render() {
     return (
       <div>
+        <TaNavigation />
         <h3>TA Application Form</h3>
         <Form>
             <Form.Group as={Row} className="mb-3" controlid="email">
@@ -149,6 +156,8 @@ class TaApplication extends Component {
                 </Col>
             </Form.Group>
         </Form>
+        <hr />
+        <Link to='/'>Home</Link>
       </div>
     );
   }

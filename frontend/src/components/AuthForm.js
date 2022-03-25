@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { signup, login } from '../actions/account';
 import fetchStates from '../reducers/fetchStates';
+import SignUpForm from './SignUpForm';
 
 class AuthForm extends Component {
-  state = { username: '', password: '', buttonClicked: false };
+  state = { 
+    username: '', 
+    password: '', 
+    buttonClicked: false 
+  };
 
   updateUsername = event => {
     this.setState({ username: event.target.value });
@@ -15,12 +21,20 @@ class AuthForm extends Component {
     this.setState({ password: event.target.value });
   }
 
+  // signup = () => {
+  //   this.setState({ buttonClicked: true });
+
+  //   const { username, password } = this.state;
+
+  //   this.props.signup({ username, password });
+  // }
+
   signup = () => {
     this.setState({ buttonClicked: true });
 
-    const { username, password } = this.state;
+    const { username, password, accountType, fullName } = this.state;
 
-    this.props.signup({ username, password });
+    this.props.signup({ username, password, accountType, fullName });
   }
 
   login = () => {
@@ -63,11 +77,15 @@ class AuthForm extends Component {
         <br />
         <div>
           <Button onClick={this.login}>Log In</Button>
-          <span> or </span>
-          <Button onClick={this.signup}>Sign Up</Button>
+          {/* <span> or </span>
+          <Link to='/sign-up'>Sign Up</Link> */}
         </div>
         <br />
         {this.Error}
+        <div>
+        <hr />
+        <SignUpForm />
+        </div>
       </div>
     );
   }
@@ -76,4 +94,5 @@ class AuthForm extends Component {
 export default connect(
   ({ account }) => ({ account }),
   { signup, login }
+  // { login }
 )(AuthForm);

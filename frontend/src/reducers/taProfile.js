@@ -1,7 +1,7 @@
 import { TAPROFILE } from "../actions/types";
 import fetchStates from "./fetchStates";
 
-const DEAFULT_PROFILE = {  };
+const DEAFULT_PROFILE = [];
 
 const taProfile = (state = DEAFULT_PROFILE, action) => {
     switch(action.type) {

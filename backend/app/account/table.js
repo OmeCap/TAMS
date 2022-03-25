@@ -4,11 +4,12 @@ const pool = require('../../databasePool.js');
 
 class AccountTable {
     // Store username and passwordHash to the table.
-    static storeAccount({ username, passwordHash }) {
+    static storeAccount({ username, passwordHash, accountType, fullName }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                'INSERT INTO account("username", "passwordHash") VALUES($1, $2)',
-                [username, passwordHash],
+                `INSERT INTO users("username", "passwordHash", "accountType", "fullName") 
+                VALUES($1, $2, $3, $4)`,
+                [username, passwordHash, accountType, fullName],
                 (error, response) => {
                     if (error) return reject(error);
 
@@ -18,11 +19,11 @@ class AccountTable {
         });
     }
 
-    // Get account details using username.
+    // Get user details using username.
     static getAccount({ username }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT id, "passwordHash", "sessionId" FROM account 
+                `SELECT "userId", "passwordHash", "sessionId" FROM users 
                 WHERE "username" = $1`,
                 [username],
                 (error, response) => {
@@ -38,7 +39,7 @@ class AccountTable {
     static updateSessionId({ sessionId, username }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                'UPDATE account SET "sessionId" = $1 WHERE "username" = $2',
+                'UPDATE users SET "sessionId" = $1 WHERE "username" = $2',
                 [sessionId, username],
                 (error, response) => {
                     if (error) return reject(error);
