@@ -21,6 +21,14 @@ const store = createStore(
     composeEnhancer(applyMiddleware(thunk))
 );
 
+// Prevent direct access for unauthenticated users
+const AuthRoute = ({ children, currentUser }) => {
+    return currentUser ? <Navigate to="/" replace /> : children;
+};
+
+
+// console.log(currentUser)
+
 store.dispatch(fetchAuthenticated())
     .then(() => {
         render(
@@ -28,7 +36,13 @@ store.dispatch(fetchAuthenticated())
                 <BrowserRouter history={history}>
                     <Routes>
                         <Route exact path='/' element={<Root />} />
-                        <Route path='/ta-application' element={<TaApplication />} />
+                        <Route 
+                            path='/ta-application' 
+                            // element={ !store.getState().account.loggedIn ? <Navigate to="/" replace /> : <TaApplication /> } // Prevent direct access for unauthenticated users
+                            element={<AuthRoute currentUser={!store.getState().account.loggedIn} >
+                                <TaApplication />
+                            </AuthRoute>}
+                        />
                         <Route path='/sign-up' element={<SignUpForm />} />
                     </Routes>
                 </BrowserRouter>
