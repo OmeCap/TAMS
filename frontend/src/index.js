@@ -26,9 +26,6 @@ const AuthRoute = ({ children, currentUser }) => {
     return currentUser ? <Navigate to="/" replace /> : children;
 };
 
-
-// console.log(currentUser)
-
 store.dispatch(fetchAuthenticated())
     .then(() => {
         render(
