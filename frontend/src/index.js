@@ -27,7 +27,7 @@ store.dispatch(fetchAuthenticated())
                         <Route 
                             path='/ta-application' 
                             // element={ !store.getState().account.loggedIn ? <Navigate to="/" replace /> : <TaApplication /> } // Prevent direct access for unauthenticated users
-                            element={<AuthRoute currentUser={!store.getState().accountInfo.accountType} >
+                            element={<AuthRoute currentUser={!store.getState().account.loggenIn} >
                                 <TaApplication />
                             </AuthRoute>}
                         />
