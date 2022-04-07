@@ -58,7 +58,8 @@ class AuthForm extends Component {
     return (
       <div>
         <h2>TAMS</h2>
-        <FormGroup>
+        <FormGroup className="mb-3">
+          <FormLabel className="form-label">Username</FormLabel>
           <FormControl
             type='text'
             value={this.state.username}
@@ -66,7 +67,9 @@ class AuthForm extends Component {
             onChange={this.updateUsername}
           />
         </FormGroup>
-        <FormGroup>
+
+        <FormGroup className='mb-3'>
+          <FormLabel className='form-label'>Password</FormLabel>
           <FormControl
             type='password'
             value={this.state.password}
@@ -74,18 +77,18 @@ class AuthForm extends Component {
             onChange={this.updatePassword}
           />
         </FormGroup>
-        <br />
-        <div>
+
+        <div className='col-12'>
           <Button onClick={this.login}>Log In</Button>
-          {/* <span> or </span>
-          <Link to='/sign-up'>Sign Up</Link> */}
+          <span> or </span>
+          <Link to='/sign-up'>Sign Up</Link>
         </div>
         <br />
         {this.Error}
-        <div>
+        {/* <div>
         <hr />
         <SignUpForm />
-        </div>
+        </div> */}
       </div>
     );
   }

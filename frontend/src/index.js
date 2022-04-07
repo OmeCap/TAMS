@@ -14,7 +14,7 @@ const history = createBrowserHistory();
 
 // Prevent direct access for unauthenticated users
 const AuthRoute = ({ children, currentUser }) => {
-    return currentUser ? <Navigate to="/" replace /> : children;
+    return currentUser ? <Navigate to="/"  /> : children;
 };
 
 store.dispatch(fetchAuthenticated())
@@ -27,7 +27,7 @@ store.dispatch(fetchAuthenticated())
                         <Route 
                             path='/ta-application' 
                             // element={ !store.getState().account.loggedIn ? <Navigate to="/" replace /> : <TaApplication /> } // Prevent direct access for unauthenticated users
-                            element={<AuthRoute currentUser={!store.getState().account.loggedIn} >
+                            element={<AuthRoute currentUser={!store.getState().accountInfo.accountType} >
                                 <TaApplication />
                             </AuthRoute>}
                         />

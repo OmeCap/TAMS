@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, FormLabel, Row } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 import { signup } from '../actions/account';
 import fetchStates from '../reducers/fetchStates';
+import store from '../store';
+import { fetchAuthenticated } from '../actions/account';
 
 class SignUpForm extends Component {
   state = { 
@@ -11,7 +13,8 @@ class SignUpForm extends Component {
     password: '', 
     accountType: '', 
     fullName: '',
-    buttonClicked: false };
+    buttonClicked: false 
+  };
 
   updateUsername = event => {
     this.setState({ username: event.target.value });
@@ -35,6 +38,20 @@ class SignUpForm extends Component {
     const { username, password, accountType, fullName } = this.state;
 
     this.props.signup({ username, password, accountType, fullName });
+
+    const currentUser = store.getState().account.loggedIn;
+    
+    // if (currentUser) {
+    //   return <Navigate to="/" replace/>
+    // } else {
+    //   this.setState({ 
+    //     username: '', 
+    //     password: '', 
+    //     accountType: '', 
+    //     fullName: '',
+    //     buttonClicked: false }
+    //   )}
+    // console.log(currentUser)
   }
 
   get Error() {
@@ -50,36 +67,40 @@ class SignUpForm extends Component {
     return (
       <div>
         <h2>TAMS</h2>
-        <Form.Group>
-          <Form.Control
+        <FormGroup className="mb-3">
+          <FormLabel className="form-label">Username</FormLabel>
+          <FormControl
             type='text'
             value={this.state.username}
             placeholder='username'
             onChange={this.updateUsername}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
+        </FormGroup>
+
+        <FormGroup className="mb-3">
+          <FormLabel className="form-label">Password</FormLabel>
+          <FormControl
             type='password'
             value={this.state.password}
             placeholder='password'
             onChange={this.updatePassword}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
+        </FormGroup>
+
+        <FormGroup className="mb-3">
+          <FormLabel className="form-label">Full Name</FormLabel>
+          <FormControl
             type='text'
             value={this.state.fullName}
             placeholder='Full Name'
             onChange={this.updateFullName}
           />
-        </Form.Group>
-        <br />
-        <Form.Group as={Row} className="mb-3">
-            {/* <Form.Label as="legend" column sm={4}>
-                Account Type
-            </Form.Label> */}
-            <Form.Control
+        </FormGroup>
+
+        <FormGroup className="mb-3">
+            <FormLabel className='form-label'>Account Type</FormLabel>
+            <FormControl
+                className="form-control"
                 as="select"
                 onChange={this.updateAccountType}
             >
@@ -88,21 +109,20 @@ class SignUpForm extends Component {
               <option value="ML">Module Leader</option>
               <option value="AA">Academic Admin</option>
               <option value="HRA">HR Admin</option>
-            </Form.Control>
-        </Form.Group>
-        {/* <Form.Group>
-          <Form.Control
+            </FormControl>
+        </FormGroup>
+        {/* <FormGroup>
+          <FormControl
             type='text'
             value={this.state.accountType}
             placeholder='account type'
             onChange={this.updateAccountType}
           />
-        </Form.Group> */}
-        <br />
-        <div>
-          <Button type='submit' onClick={this.signup}>Sign Up</Button>
-          {/* <span> or </span>
-          <Link to='/'>Login</Link> */}
+        </FormGroup> */}
+        <div className="col-12">
+          <Button type="submit" onClick={this.signup}>Sign Up</Button>
+          <span> or </span>
+          <Link to='/'>Login</Link>
         </div>
         <br />
         {this.Error}
