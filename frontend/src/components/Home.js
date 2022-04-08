@@ -7,6 +7,8 @@ import TaApplication from './taApplication';
 import TaNavigation from './TaNavigation';
 import AccountInfo from './AccountInfo';
 
+import ProtectedScreen from './Test';
+
 class Home extends Component {
     render() {
         return (
@@ -20,7 +22,9 @@ class Home extends Component {
                 <hr />
                 <Link to='/ta-application'> TA Application </Link>
                 <hr />
-                <AccountInfo />
+                <Link to='/protected'> Protected </Link>
+                <hr />
+                {/* <AccountInfo /> */}
             </div>
         );
     }

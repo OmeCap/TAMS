@@ -9,13 +9,14 @@ import SignUpForm from './components/SignUpForm.js';
 import { fetchAuthenticated } from './actions/account.js';
 import './index.css';
 import TaApplication from './components/taApplication.js';
+import ProtectedScreen from './components/Test.js';
 
 const history = createBrowserHistory();
 
 // Prevent direct access for unauthenticated users
-const AuthRoute = ({ children, currentUser }) => {
-    return currentUser ? <Navigate to="/"  /> : children;
-};
+// const AuthRoute = ({ children, currentUser }) => {
+//     return currentUser ? <Navigate to="/"  /> : children;
+// };
 
 store.dispatch(fetchAuthenticated())
     .then(() => {
@@ -24,14 +25,16 @@ store.dispatch(fetchAuthenticated())
                 <BrowserRouter history={history}>
                     <Routes>
                         <Route exact path='/' element={<Root />} />
-                        <Route 
+                        {/* <Route 
                             path='/ta-application' 
                             // element={ !store.getState().account.loggedIn ? <Navigate to="/" replace /> : <TaApplication /> } // Prevent direct access for unauthenticated users
-                            element={<AuthRoute currentUser={!store.getState().account.loggenIn} >
+                            element={<AuthRoute currentUser={store.getState().account.loggenIn} >
                                 <TaApplication />
                             </AuthRoute>}
-                        />
+                        /> */}
+                        <Route path='ta-application' element={<TaApplication />} />
                         <Route path='/sign-up' element={<SignUpForm />} />
+                        <Route path='/protected' element={<ProtectedScreen />} />
                     </Routes>
                 </BrowserRouter>
             </Provider>,
