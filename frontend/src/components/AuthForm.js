@@ -4,7 +4,7 @@ import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { signup, login } from '../actions/account';
 import fetchStates from '../reducers/fetchStates';
-import SignUpForm from './SignUpForm';
+// import SignUpForm from './SignUpForm';
 
 class AuthForm extends Component {
   state = { 
@@ -29,13 +29,13 @@ class AuthForm extends Component {
   //   this.props.signup({ username, password });
   // }
 
-  signup = () => {
-    this.setState({ buttonClicked: true });
+  // signup = () => {
+  //   this.setState({ buttonClicked: true });
 
-    const { username, password, accountType, fullName } = this.state;
+  //   const { username, password, accountType, fullName } = this.state;
 
-    this.props.signup({ username, password, accountType, fullName });
-  }
+  //   this.props.signup({ username, password, accountType, fullName });
+  // }
 
   login = () => {
     this.setState({ buttonClicked: true });
@@ -96,6 +96,6 @@ class AuthForm extends Component {
 
 export default connect(
   ({ account }) => ({ account }),
-  { signup, login }
-  // { login }
+  // { signup, login }
+  { login }
 )(AuthForm);
